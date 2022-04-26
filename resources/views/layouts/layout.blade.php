@@ -5,23 +5,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <title>@yield('title')</title>
 </head>
 <body>
     <header>
-        <div>
-            <ul>
+        <div class="header_nav">
+            <ul class="header_nav_ul">
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="{{ route('news') }}">News</a></li>
+                <li><a href="{{ route('category') }}">Categories</a></li>
             </ul>
         </div>
     </header>
 
-    <section>
-        <h1>@yield('title')</h1>
-    </section>
-
     @yield('content')
+
+    <footer>Some footer content</footer>
 
 </body>
 </html>

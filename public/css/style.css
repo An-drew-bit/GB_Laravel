@@ -1,0 +1,10 @@
+.header-nav {
+    display: flex;
+}
+
+.header_nav_ul {
+    display: flex;
+    width: 300px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
