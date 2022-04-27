@@ -32,4 +32,19 @@ class CategoryController extends Controller
 
         return view('category.single', compact('catNews', 'category'));
     }
+
+    public function singleNew($news)
+    {
+        $faker = Factory::create();
+
+        $news = [
+            'news' => $news,
+            'title' => $faker->text(50),
+            'text' => $faker->text(100),
+            'author' => $faker->name,
+            'date' => date('Y-m-d')
+        ];
+
+        return view('category.news', compact('news'));
+    }
 }

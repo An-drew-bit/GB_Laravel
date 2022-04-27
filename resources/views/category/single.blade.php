@@ -7,7 +7,7 @@
         <h1>Category {{ $category }} </h1>
 
         @foreach($catNews as $category)
-            <a href="">{{ $category['title'] }}</a><br>
+            <a href="{{ route('singleNew', ['id' => $category['title']]) }}">{{ $category['title'] }}</a><br>
             <p>{{ $category['text'] }}</p>
             <p>{{ $category['author'] }}</p>
             <p>{{ $category['date'] }}</p>
