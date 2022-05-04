@@ -7,8 +7,8 @@ use Illuminate\View\View;
 
 class AppComposer
 {
-    public function compose(View $view, Auth $auth)
+    public function compose(View $view): void
     {
-        $view->with('name', $auth->user());
+        $view->with('name', Auth::user());
     }
 }

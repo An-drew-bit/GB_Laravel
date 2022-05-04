@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\{View, Auth};
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +26,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        Password::defaults(function () {
+            return Password::min(8)
+                ->letters()
+                ->uncompromised()
+                ->numbers()
+                ->mixedCase()
+                ->symbols();
+        });
     }
 }
