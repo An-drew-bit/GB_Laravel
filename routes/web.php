@@ -1,12 +1,24 @@
 <?php
 
-use App\Http\Controllers\{CategoryController, HomeController, NewsController};
+use App\Http\Controllers\{HomeController, UserController};
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', HomeController::class)->name('home');
+Route::get('/', HomeController::class)
+    ->name('home');
 
-Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/category', [])
+    ->name('category');
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('/register', 'create')
+        ->name('register.create');
 
-Route::get('/category', [CategoryController::class, 'index'])->name('category');
-Route::get('/category/{id}', [CategoryController::class, 'show'])->name('show');
+    Route::post('/register', 'store')
+        ->name('register.store');
+
+    Route::get('/login', 'loginIn')
+        ->name('login.create');
+
+    Route::post('/login', 'login')
+        ->name('login');
+});
