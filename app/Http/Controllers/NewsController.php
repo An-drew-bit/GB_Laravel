@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function __invoke(Request $request)
+    public function index()
     {
         $news = [
             '1' => [
