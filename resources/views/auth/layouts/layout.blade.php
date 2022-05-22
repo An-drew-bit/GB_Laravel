@@ -12,12 +12,10 @@
     <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
 </head>
 <body class="text-center">
+    <main class="form-signin">
 
-<main class="form-signin">
+        @yield('content')
 
-    @yield('content')
-
-</main>
-
+    </main>
 </body>
 </html>
