@@ -17,7 +17,7 @@
                             @auth
                                 <li><a href="{{ route('home') }}" class="text-white">Личный кабинет</a><b
                                         class="text-white m-lg-2">|</b></li>
-                                <li><a href="{{-- route('logout') --}}" class="text-white m-lg-0">Выйти {{ $name }}</a></li>
+                                <li><a href="{{ route('logout') }}" class="text-white m-lg-0">Выйти {{ $name }}</a></li>
                             @endauth
 
                             @guest

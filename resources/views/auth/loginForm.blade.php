@@ -1,7 +1,7 @@
 @extends('auth.layouts.layout')
 
 @section('content')
-    <form action="{{-- route('login') --}}" method="POST">
+    <form action="{{ route('login') }}" method="POST">
         @csrf
 
         <a href="{{ route('home') }}">
