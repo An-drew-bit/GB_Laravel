@@ -1,4 +1,4 @@
-@extends('user.layouts.layout')
+@extends('auth.layouts.layout')
 
 @section('content')
     <form action="{{-- route('login') --}}" method="POST">
