@@ -13,7 +13,13 @@
 @section('content')
     <div class="album py-5 bg-light">
         <div class="container">
-            asdasdasd
+            <div class="d-flex flex-row flex-wrap">
+                @foreach($categories as $category)
+                    <div class="col">
+                        <h3><a href="{{ route('home') }}">{{ $category->title }}</a></h3>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

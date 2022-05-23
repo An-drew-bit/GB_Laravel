@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\News;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,8 +13,8 @@ class NewsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        News::factory(50)->create();
     }
 }
