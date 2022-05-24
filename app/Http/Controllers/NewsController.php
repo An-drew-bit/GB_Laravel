@@ -6,6 +6,11 @@ use App\Http\Requests\NewsRequest;
 
 class NewsController extends Controller
 {
+    public function index()
+    {
+        return view('front.news.view');
+    }
+
     public function create()
     {
         return view('front.news.create');

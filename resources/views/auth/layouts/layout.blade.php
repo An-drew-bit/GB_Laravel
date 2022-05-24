@@ -36,6 +36,12 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            @if (session()->has('message'))
+                <div class="alert alert-warning">
+                    {{ session('message') }}
+                </div>
+            @endif
         </div>
 
         @yield('content')

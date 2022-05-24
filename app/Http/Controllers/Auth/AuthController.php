@@ -1,9 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\{AuthRequest, RegisterRequest};
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use function auth;
+use function bcrypt;
+use function session;
+use function to_route;
+use function view;
 
 class AuthController extends Controller
 {
@@ -21,7 +28,11 @@ class AuthController extends Controller
         ]);
 
         if ($user) {
+            event(new Registered($user));
+
             auth('web')->login($user);
+
+            return to_route('verification.notice');
         }
 
         return to_route('home')->with('success', 'Вы успешно зарегистрировались');

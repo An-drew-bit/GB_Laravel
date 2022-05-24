@@ -10,12 +10,12 @@
         <h1 class="h3 mb-3 fw-normal">Вход</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            <label for="email">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <label for="password">Password</label>
         </div>
 
         <div class="checkbox mb-3">
