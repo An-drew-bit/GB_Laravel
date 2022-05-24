@@ -6,11 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\{AuthRequest, RegisterRequest};
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use function auth;
-use function bcrypt;
-use function session;
-use function to_route;
-use function view;
 
 class AuthController extends Controller
 {
@@ -52,7 +47,7 @@ class AuthController extends Controller
             session()->flash('success', 'Вы успешно вошли');
 
             if (auth()->user()->is_admin) {
-                return to_route('home'); // когда будет админка туда
+                return to_route('admin.index');
 
             } else {
                 return to_route('home');

@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
-Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.view');
 
 Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->group(function () {
     Route::get('/email/verify', 'getVerifyForm')->middleware('auth')
@@ -28,6 +27,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/news/add', 'store')->name('news.store');
     });
 });
+
+Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.view');
 
 Route::middleware('guest')->group(function () {
     Route::controller(\App\Http\Controllers\Auth\AuthController::class)->group(function () {

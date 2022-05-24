@@ -16,7 +16,7 @@
                         <div class="d-flex">
                             @auth
                                 @if($name->is_admin)
-                                    <li><a href="{{ route('home') }}" class="text-white">Админка</a><b
+                                    <li><a href="{{-- route('admin.index') --}}" class="text-white">Админка</a><b
                                             class="text-white m-lg-2">|</b></li>
                                 @else
                                     <li><a href="{{ route('home') }}" class="text-white">Личный кабинет</a><b
