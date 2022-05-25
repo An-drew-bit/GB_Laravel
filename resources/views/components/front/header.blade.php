@@ -17,13 +17,13 @@
                             @auth
                                 <li><a href="{{ route('home') }}" class="text-white">Личный кабинет</a><b
                                         class="text-white m-lg-2">|</b></li>
-                                <li><a href="{{ route('logout') }}" class="text-white m-lg-0">Выйти {{ $name }}</a></li>
+                                <li><a href="{{-- route('logout') --}}" class="text-white m-lg-0">Выйти {{ $name }}</a></li>
                             @endauth
 
                             @guest
-                                <li><a href="{{ route('login.create') }}" class="text-white">Войти</a><b
+                                <li><a href="{{ route('login.showForm') }}" class="text-white">Войти</a><b
                                         class="text-white m-lg-2">|</b></li>
-                                <li><a href="{{ route('register.create') }}"
+                                <li><a href="{{ route('register.showForm') }}"
                                        class="text-white m-lg-0">Регистрация</a></li>
                             @endguest
                         </div>
