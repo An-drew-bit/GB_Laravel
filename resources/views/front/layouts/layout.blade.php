@@ -8,7 +8,7 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>GeekBrains Laravel</title>
 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/front/css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -16,9 +16,7 @@
 
 <main>
 
-    @yield('title')
-
-    <div class="container">
+    <div class="container mt-5">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="list-unstyled">
@@ -42,13 +40,15 @@
         @endif
     </div>
 
+    @yield('title')
+
     @yield('content')
 
 </main>
 
 <x-front.footer></x-front.footer>
 
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 </html>

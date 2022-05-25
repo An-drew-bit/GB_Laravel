@@ -5,7 +5,7 @@
         @csrf
 
         <a href="{{ route('home') }}">
-            <img class="mb-4" src="{{ asset('img/bootstrap-logo.svg') }}" alt="" width="72" height="57">
+            <img class="mb-4" src="{{ asset('assets/front/img/bootstrap-logo.svg') }}" alt="" width="72" height="57">
         </a>
 
         <div class="container">
