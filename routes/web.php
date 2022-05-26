@@ -21,7 +21,7 @@ Route::controller(\App\Http\Controllers\CategoryController::class)->group(functi
 
 // admin route
 Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin.index');
+    Route::get('/', \App\Http\Controllers\Admin\MainController::class)->name('admin.index');
 
     Route::resource('/category', \App\Http\Controllers\Admin\CategoryController::class)
         ->names('admin.category');

@@ -29,27 +29,23 @@ class NewsController extends Controller
         return to_route('admin.news.index')->with('success', 'Новость успешно добавлена');
     }
 
-    public function edit(int|string $id)
+    public function edit(News $news)
     {
-        $new = app(News::class);
-
         return view('admin.news.edit', [
-            'new' => $new->find($id)
+            'news' => $news
         ]);
     }
 
-    public function update(NewsRequest $request, int|string $id)
+    public function update(NewsRequest $request, News $news)
     {
-        $new = News::find($id);
-
-        $new->update($request->all());
+        $news->update($request->all());
 
         return to_route('admin.news.index')->with('success', 'Изменения сохранены');
     }
 
-    public function destroy(int|string $id)
+    public function destroy(News $news)
     {
-        News::find($id)?->delete();
+        $news->delete();
 
         return to_route('admin.news.index')->with('success', 'Новость успешно удалена');
     }

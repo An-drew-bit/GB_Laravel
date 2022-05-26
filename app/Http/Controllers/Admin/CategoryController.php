@@ -29,27 +29,23 @@ class CategoryController extends Controller
         return to_route('admin.category.index')->with('success', 'Категория успешно добавлена');
     }
 
-    public function edit(int|string $id)
+    public function edit(Category $category)
     {
-        $category = app(Category::class);
-
         return view('admin.category.edit', [
-            'category' => $category->find($id)
+            'category' => $category
         ]);
     }
 
-    public function update(CategoryRequest $request, int|string $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $category = Category::find($id);
-
         $category->update($request->all());
 
         return to_route('admin.category.index')->with('success', 'Изменения сохранены');
     }
 
-    public function destroy(int|string $id)
+    public function destroy(Category $category)
     {
-        /*$category = */Category::find($id)?->delete();
+        /*$category = */$category->delete();
 
         /*if ($category->news->count()) {
             return to_route('admin.category.index')->with('error', 'Ошибка, у категории есть новости'); как сделать проверку на есть ли там записи?

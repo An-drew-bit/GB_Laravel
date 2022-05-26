@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container d-flex flex-column">
-        <form action="{{ route('admin.category.update', ['category' => $category->id]) }}" method="post">
+        <form action="{{ route('admin.category.update', ['category' => $category]) }}" method="post">
             @csrf
             @method('PUT')
 
