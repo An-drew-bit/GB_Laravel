@@ -47,6 +47,9 @@ Route::middleware('guest')->group(function () {
         Route::get('/register', 'showRegisterForm')->name('register.showForm');
         Route::post('/register', 'store')->name('register.store');
 
+        Route::get('/forgot', 'showForgotForm')->name('login.showForgotForm');
+        Route::post('/forgot', 'forgot')->name('login.forgot');
+
         Route::get('/login', 'showLoginForm')->name('login.showForm');
         Route::post('/login', 'login')->name('login');
     });

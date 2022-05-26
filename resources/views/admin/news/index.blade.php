@@ -5,7 +5,7 @@
         <h1 class="h2">Список новостей</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Добавить</button>
+                <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить</a>
             </div>
         </div>
     </div>
@@ -13,27 +13,57 @@
 
 @section('content')
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Author</th>
-                <th scope="col">Category</th>
-                <th scope="col">Slug</th>
-            </tr>
-            </thead>
-            <tbody>
+        @if(count($news))
+            <table class="table table-striped table-sm">
+                <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">title</th>
-                    <th scope="col">desc</th>
-                    <th scope="col">auth</th>
-                    <th scope="col">cate</th>
-                    <th scope="col">slug</th>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Slug</th>
                 </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                @foreach($news as $new)
+                    <tr>
+                        <td>{{ $new->id }}</td>
+                        <td>{{ $new->title }}</td>
+                        <td>{{ $new->description }}</td>
+                        <td>{{ $new->author }}</td>
+                        <td>{{ $new->category_id }}</td>
+                        <td>{{ $new->slug }}</td>
+
+                        <td>
+                            <a href="{{ route('admin.news.edit', ['news' => $new->id]) }}"
+                               class="btn btn-primary btn-sm text-white">Edit</a>
+                        </td>
+                        <td>
+                            <form action="{{ route('admin.news.destroy', ['news' => $new->id]) }}"
+                                  method="post">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger ms-3 btn-sm"
+                                        onclick="return confirm('Подтвердите удаление')">Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+
+                @else
+                    <div class="container text-center">
+                        <h2 class="h4 fw-light">Новостей пока нет..</h2>
+                    </div>
+                @endif
+                </tbody>
+            </table>
+
+            <div class="container mt-3">
+                <div>{{ $news->links() }}</div>
+            </div>
     </div>
 @endsection

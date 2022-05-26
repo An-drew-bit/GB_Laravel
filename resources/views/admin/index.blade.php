@@ -2,7 +2,7 @@
 
 @section('title')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Главная</h1>
+        <h1 class="h2">Панель администратора</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -18,17 +18,14 @@
 
 @section('content')
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="alert alert-danger">
+            <h6 class="fw-light">Ошибка</h6>
+        </div>
+        <div class="alert alert-success">
+            <h6 class="fw-light">Это сообщение было добавлено динамически</h6>
+        </div>
+        <div class="alert alert-warning">
+            <h6 class="fw-light">Ворнинг</h6>
+        </div>
     </div>
 @endsection

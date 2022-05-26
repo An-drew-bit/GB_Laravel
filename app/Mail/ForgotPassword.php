@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactForm extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,8 @@ class ContactForm extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(protected $password)
     {
-        //
     }
 
     /**
@@ -28,6 +27,8 @@ class ContactForm extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('auth.email.forgot')->with([
+            'password' => $this->password
+        ]);
     }
 }

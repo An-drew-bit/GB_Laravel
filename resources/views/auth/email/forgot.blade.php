@@ -1,1 +1,1 @@
-<?php
+<p>Password: {{ $password }}</p>

@@ -10,11 +10,13 @@
         <h1 class="h3 mb-3 fw-normal">Вход</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                   name="email" placeholder="name@example.com">
             <label for="email">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                   name="password" placeholder="Password">
             <label for="password">Password</label>
         </div>
 
@@ -22,6 +24,10 @@
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
+        </div>
+
+        <div class="mb-3">
+            <div><a href="{{ route('login.showForgotForm') }}">Забыли пароль?</a></div>
         </div>
 
         <div class="mb-3">
