@@ -3,8 +3,9 @@
 ### Чистый запуск
 ```
 {%project_folder%}: cp ./env.example ./.env
-{%project_folder%}: ./vendor/bin/sail up -d
-{%project_folder%}: alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+{%project_folder%}: composer.phar install
+{%project_folder%}: ./vendor/bin/sail или alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+{%project_folder%}: sail up -d
 {%project_folder%}: artisan migrate --seed
 ```
 

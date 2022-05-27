@@ -28,6 +28,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class)
         ->names('admin.news');
+
+    Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
+        ->names('admin.users');
 });
 // end admin route
 

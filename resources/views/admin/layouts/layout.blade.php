@@ -40,7 +40,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link @if(request()->routeIs('admin.users.*')) active @endif"
+                           href="{{ route('admin.users.index') }}">
                             <span data-feather="users" class="align-text-bottom"></span>
                             Пользователи
                         </a>

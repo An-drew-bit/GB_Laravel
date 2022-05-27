@@ -31,10 +31,10 @@
                         <td>{{ $category->slug }}</td>
 
                         <td class="d-flex justify-content-end">
-                            <a href="{{ route('admin.category.edit', ['category' => $category->id]) }}"
+                            <a href="{{ route('admin.category.edit', ['category' => $category]) }}"
                                class="btn btn-primary btn-sm text-white">Edit</a>
 
-                            <form action="{{ route('admin.category.destroy', ['category' => $category->id]) }}"
+                            <form action="{{ route('admin.category.destroy', ['category' => $category]) }}"
                                   method="post">
                                 @csrf
                                 @method('DELETE')

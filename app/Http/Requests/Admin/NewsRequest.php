@@ -26,13 +26,13 @@ class NewsRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:30'],
             'description' => ['required', 'string', 'max:30'],
+            'category_id' => ['required'],
             'image' => [
                 'image',
                 'nullable',
                 'max:1999',
                 'mimes:jpeg,png,jpg,gif,svg'
             ],
-            //'category_id' => []
         ];
     }
 

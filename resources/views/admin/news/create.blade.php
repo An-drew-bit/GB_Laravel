@@ -23,6 +23,13 @@
                        name="description" value="{{ old('description') }}">
             </div>
 
+            <label class="form-label" for="category_id">Category</label>
+            <select class="form-control mb-2 w-50" id="category_id" name="category_id">
+                @foreach($categories as $key => $values)
+                    <option value="{{ $key }}">{{ $values }}</option>
+                @endforeach
+            </select>
+
             <div class="mb-3 w-50">
                 <label for="image" class="form-label">Изображение</label>
                 <input type="file" class="form-control" name="image">

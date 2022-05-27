@@ -32,7 +32,7 @@
                         <td>{{ $new->id }}</td>
                         <td>{{ $new->title }}</td>
                         <td>{{ $new->description }}</td>
-                        <td>{{ $new->author }}</td>
+                        <td>{{ $new->user_id }}</td>
                         <td>{{ $new->category_id }}</td>
                         <td>{{ $new->slug }}</td>
 
