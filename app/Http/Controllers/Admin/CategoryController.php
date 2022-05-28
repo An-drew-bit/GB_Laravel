@@ -45,11 +45,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        /*$category = */$category->delete();
+        if (count($category->news)) {
+            return to_route('admin.category.index')->with('error', 'Ошибка, у категории есть новости');
+        }
 
-        /*if ($category->news->count()) {
-            return to_route('admin.category.index')->with('error', 'Ошибка, у категории есть новости'); как сделать проверку на есть ли там записи?
-        }*/
+        $category->delete();
 
         return to_route('admin.category.index')->with('success', 'Категория успешно удалена');
     }
