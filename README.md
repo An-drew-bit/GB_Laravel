@@ -1,9 +1,15 @@
-#About Laravel
+## About Laravel
 
-step for run enviropment:
+### Чистый запуск
+```
+{%project_folder%}: cp ./env.example ./.env
+{%project_folder%}: ./vendor/bin/sail up -d
+{%project_folder%}: alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+{%project_folder%}: artisan migrate --seed
+```
 
-composer install
-
-./vendor/bin/sail up
-
-alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+### Для локального запуска
+```
+{%project_folder%}: php artisan serve
+http://127.0.0.1:8000
+```

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('front.category.index');
+        $categories = Category::all();
+
+        return view('front.category.index', compact('categories'));
     }
 }
