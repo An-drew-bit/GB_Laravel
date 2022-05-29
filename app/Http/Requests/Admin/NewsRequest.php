@@ -25,8 +25,13 @@ class NewsRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:30'],
-            'description' => ['required', 'string', 'max:30'],
-            'category_id' => ['required'],
+            'description' => ['required', 'string', 'max:50'],
+            'category_id' => [
+                'required',
+                'min:1',
+                'integer',
+                'exists:categories,id'
+            ],
             'image' => [
                 'image',
                 'nullable',
@@ -36,7 +41,7 @@ class NewsRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'user_id' => auth('web')->id()

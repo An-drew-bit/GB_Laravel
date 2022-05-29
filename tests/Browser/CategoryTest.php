@@ -3,7 +3,6 @@
 namespace Tests\Browser;
 
 use App\Models\Category;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -16,15 +15,13 @@ class CategoryTest extends DuskTestCase
      */
     public function testAddCategoryForm()
     {
-        $category = Category::factory()->create([
-            'title' => 'Some test Category'
-        ]);
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($category) {
-            $browser->visit(route('admin.category.create'))
+            $browser->visit('admin.category.create')
                 ->type('title', $category->title)
                 ->press('Добавить')
-                ->assertPathIs(route('admin.category.index'));
+                ->assertRouteIs('admin.category.store');
         });
     }
 
@@ -40,10 +37,10 @@ class CategoryTest extends DuskTestCase
         ]);
 
         $this->browse(function (Browser $browser) use ($category) {
-            $browser->visit(route('admin.category.edit'))
+            $browser->visit('admin.category.edit')
                 ->type('title', $category->title)
                 ->press('Изменить')
-                ->assertPathIs(route('admin.category.index'));
+                ->assertRouteIs('admin.category.store');
         });
     }
 }
