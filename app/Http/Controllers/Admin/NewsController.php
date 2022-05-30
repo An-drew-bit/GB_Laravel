@@ -8,10 +8,8 @@ use App\Models\{Category, News, User};
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(News $news)
     {
-        $news = app(News::class);
-
         return view('admin.news.index', [
             'news' => $news->paginate(10)
         ]);
