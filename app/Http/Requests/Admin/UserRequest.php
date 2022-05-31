@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth('web')->user()->is_admin == 1;
+        return true;
     }
 
     /**

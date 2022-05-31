@@ -16,6 +16,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Create</th>
+                    <th scope="col">Role</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,8 +27,13 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $user->is_admin }}</td>
+
 
                         <td class="d-flex justify-content-end">
+                            <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}"
+                               class="btn btn-primary btn-sm text-white">Edit</a>
+
                             <form action="{{ route('admin.users.destroy', ['user' => $user]) }}"
                                   method="post">
                                 @csrf

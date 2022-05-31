@@ -19,8 +19,7 @@ Route::controller(\App\Http\Controllers\CategoryController::class)->group(functi
     Route::get('/category', 'index')->name('category');
 });
 
-// admin route
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', \App\Http\Controllers\Admin\MainController::class)->name('admin.index');
 
     Route::resource('/category', \App\Http\Controllers\Admin\CategoryController::class)
@@ -32,7 +31,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
 });
-// end admin route
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
