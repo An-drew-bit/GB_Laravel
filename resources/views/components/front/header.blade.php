@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('category') }}" class="nav-link @if(request()->routeIs('category.*')) text-secondary @else text-white @endif">
+                        <a href="{{ route('categories.index') }}" class="nav-link @if(request()->routeIs('categories.*')) text-secondary @else text-white @endif">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
                             Категории
                         </a>

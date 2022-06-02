@@ -14,10 +14,11 @@ class FeedbackFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'user_id' => 1,
+            'description' => $this->faker->text
         ];
     }
 }

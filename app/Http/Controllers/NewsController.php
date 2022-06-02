@@ -26,6 +26,6 @@ class NewsController extends Controller
 
     public function store(NewsRequest $request)
     {
-        return to_route('home')->with('success', 'Статья добавлена');
+        return to_route('home')->with('success', 'Новость добавлена');
     }
 }
