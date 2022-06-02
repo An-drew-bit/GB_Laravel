@@ -14,19 +14,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link @if(request()->routeIs('')) text-secondary @else text-white @endif">
+                        <a href="{{ route('news.index') }}" class="nav-link @if(request()->routeIs('news.*')) text-secondary @else text-white @endif">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
                             Новости
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('category') }}" class="nav-link @if(request()->routeIs('category')) text-secondary @else text-white @endif">
+                        <a href="{{ route('category') }}" class="nav-link @if(request()->routeIs('category.*')) text-secondary @else text-white @endif">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
                             Категории
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link @if(request()->routeIs('')) text-secondary @else text-white @endif">
+                        <a href="{{ route('feedback.index') }}" class="nav-link @if(request()->routeIs('feedback.*')) text-secondary @else text-white @endif">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                             Отзывы
                         </a>

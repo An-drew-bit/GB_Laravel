@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\News;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(News $news)
+    {
+        return view('front.news.index', [
+            'news' => $news->orderByDesc('created_at')->paginate(6)
+        ]);
+    }
+
+    public function showNew()
     {
         return view('front.news.view');
     }

@@ -39,11 +39,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/news/create', 'create')->name('news.create');
         Route::post('/news/add', 'store')->name('news.store');
     });
+
+    Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function () {
+        Route::get('/feedback', 'index')->name('feedback.index');
+
+
+    });
 });
 
-Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.view');
+Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
+    Route::get('/news', 'index')->name('news.index');
+
+    Route::get('/news/{slug}', 'showNew')->name('news.view');
+});
+
 
 Route::middleware('guest')->group(function () {
+    Route::get('/feedback', [\App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.index');
+
     Route::controller(\App\Http\Controllers\Auth\AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterForm')->name('register.showForm');
         Route::post('/register', 'store')->name('register.store');
