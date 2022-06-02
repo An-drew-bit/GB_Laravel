@@ -24,14 +24,23 @@
             </div>
 
             <div class="col-md-5 offset-md-1 mb-3">
-                <form>
+                <form action="{{ route('subscribe') }}" method="POST">
+                    @csrf
+
                     <h5>Подписывайтесь на нашу новостную рассылку</h5>
                     <p>Ежемесячный дайджест всего нового и интересного от нас.</p>
-                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email address</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
+                    @auth
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="email" class="visually-hidden">Email address</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                                   placeholder="Email address">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    @endauth
+
+                    @guest
+                        <p class="text-info">Войдите что бы подписаться</p>
+                    @endguest
                 </form>
             </div>
         </div>

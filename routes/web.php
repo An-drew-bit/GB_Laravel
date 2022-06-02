@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+Route::controller(\App\Http\Controllers\HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::post('/', 'subscribe')->name('subscribe');
+});
 
 Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->group(function () {
     Route::get('/email/verify', 'getVerifyForm')

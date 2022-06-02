@@ -24,7 +24,15 @@ class FeedbackRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => ['required', 'string', 'max:200', 'min:5']
+            'description' => ['required', 'string', 'max:200', 'min:5'],
+            'user_id' => ['exists:users,id']
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => auth('web')->id()
+        ]);
     }
 }

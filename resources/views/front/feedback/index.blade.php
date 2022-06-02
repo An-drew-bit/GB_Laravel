@@ -15,14 +15,6 @@
         <div>{{ $feedbacks->links() }}</div>
     </div>
 
-    @auth
-        <div class="container d-flex justify-content-end">
-            <div class="row mb-5 me-1">
-                <a href="{{ route('news.create') }}" class="btn btn-sm btn-outline-secondary">Создать свою</a>
-            </div>
-        </div>
-    @endauth
-
     <div class="bg-light py-5">
         <div class="container">
             @foreach($feedbacks as $feedback)
@@ -30,7 +22,7 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <p class="card-text"><span class="fw-bold">Пользователь:</span> {{ $feedback->user->name }}</p>
-                            <p class="card-text"><span class="fw-bold">Отзыв:</span> {{ $feedback->description }}</p>
+                            <p class="card-text"><span class="fw-bold">Отзыв:</span> {!! $feedback->description !!}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">{{ $feedback->created_at->format('d-m-Y') }}</small>
                             </div>

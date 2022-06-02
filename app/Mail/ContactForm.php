@@ -16,9 +16,8 @@ class ContactForm extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(protected $formData)
     {
-        //
     }
 
     /**
@@ -28,6 +27,8 @@ class ContactForm extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('auth.email.contact')->with([
+            'formData' => $this->formData
+        ]);
     }
 }
