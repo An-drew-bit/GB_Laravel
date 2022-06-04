@@ -10,6 +10,8 @@
 
     <link href="{{ asset('assets/front/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/front/css/signin.css') }}" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/9682048b34.js" crossorigin="anonymous"></script>
 </head>
 <body class="text-center">
     <main class="form-signin">

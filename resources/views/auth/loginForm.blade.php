@@ -26,6 +26,12 @@
             </label>
         </div>
 
+        <div class="mb-3 d-flex justify-content-center">
+            <p>Через социальные сети:</p>
+            <div class="ms-3"><a href="{{ route('social.redirect', ['driver' => 'vkontakte']) }}"><i class="fab fa-vk"></i></a></div>
+            <div class="ms-3"><a href="{{ route('social.redirect', ['driver' => 'facebook']) }}"><i class="fab fa-facebook"></i></a></div>
+        </div>
+
         <div class="mb-3">
             <div><a href="{{ route('login.showForgotForm') }}">Забыли пароль?</a></div>
         </div>
