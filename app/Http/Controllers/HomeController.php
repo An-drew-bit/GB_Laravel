@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         $news = News::orderByDesc('created_at')->paginate(6);
 

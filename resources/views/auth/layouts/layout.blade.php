@@ -8,8 +8,8 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>GeekBrains Laravel</title>
 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/front/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/front/css/signin.css') }}" rel="stylesheet">
 </head>
 <body class="text-center">
     <main class="form-signin">
@@ -34,6 +34,12 @@
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session()->has('message'))
+                <div class="alert alert-warning">
+                    {{ session('message') }}
                 </div>
             @endif
         </div>

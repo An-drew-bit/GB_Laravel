@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Mail\ForgotPassword;
+use App\Http\Requests\Auth\{AuthRequest, ForgotRequest, RegisterRequest};
 use App\Models\User;
-use App\Http\Requests\Auth\{AuthRequest, RegisterRequest};
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -21,7 +25,11 @@ class AuthController extends Controller
         ]);
 
         if ($user) {
+            event(new Registered($user));
+
             auth('web')->login($user);
+
+            return to_route('verification.notice');
         }
 
         return to_route('home')->with('success', 'Вы успешно зарегистрировались');
@@ -41,7 +49,7 @@ class AuthController extends Controller
             session()->flash('success', 'Вы успешно вошли');
 
             if (auth()->user()->is_admin) {
-                return to_route('home'); // когда будет админка туда
+                return to_route('admin.index');
 
             } else {
                 return to_route('home');
@@ -49,6 +57,25 @@ class AuthController extends Controller
         }
 
         return to_route('login')->with('error', 'Не правильно введен Логин или Пароль');
+    }
+
+    public function showForgotForm()
+    {
+        return view('auth.forgotPassword.forgotForm');
+    }
+
+    public function forgot(ForgotRequest $request)
+    {
+        $user = User::where(['email' => $request->get('email')])->first();
+
+        $password = uniqid();
+
+        $user->password = bcrypt($password);
+        $user->save();
+
+        Mail::to($user)->send(new ForgotPassword($password));
+
+        return to_route('login.showForm')->with('message', 'Письмо отправлено в логи');
     }
 
     public function logout()

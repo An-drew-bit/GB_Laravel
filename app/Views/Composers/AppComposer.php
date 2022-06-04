@@ -1,14 +1,13 @@
 <?php
 
-namespace App\View\Composers;
+namespace App\Views\Composers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AppComposer
 {
     public function compose(View $view): void
     {
-        $view->with('name', Auth::user());
+        $view->with('name', auth()->user());
     }
 }
