@@ -27,6 +27,7 @@ Route::controller(\App\Http\Controllers\CategoryController::class)->group(functi
 
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', \App\Http\Controllers\Admin\MainController::class)->name('admin.index');
+    Route::get('/parser', \App\Http\Controllers\Admin\ParserController::class)->name('admin.parser');
 
     Route::resource('/category', \App\Http\Controllers\Admin\CategoryController::class)
         ->names('admin.category');
@@ -63,6 +64,13 @@ Route::middleware('guest')->group(function () {
     Route::controller(\App\Http\Controllers\Auth\AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterForm')->name('register.showForm');
         Route::post('/register', 'store')->name('register.store');
+
+        Route::get('/login/{driver}/redirect', [\App\Http\Controllers\Auth\SocialController::class, 'redirect'])
+            ->where('driver', '\w+')
+            ->name('social.redirect');
+        Route::get('/login/{driver}/callback', [\App\Http\Controllers\Auth\SocialController::class, 'callback'])
+            ->where('driver', '\w+')
+            ->name('social.callback');
 
         Route::get('/forgot', 'showForgotForm')->name('login.showForgotForm');
         Route::post('/forgot', 'forgot')->name('login.forgot');

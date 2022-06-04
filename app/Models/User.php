@@ -21,8 +21,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'is_admin'
+        'is_admin',
+        'last_name',
+        'avatar',
+        'last_login_at',
     ];
+
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,6 +47,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dates = ['last_login_at'];
 
     public function news()
     {

@@ -27,6 +27,6 @@ class ParserController extends Controller
             ]
         ]);
 
-        dump($data);
+        return $data;
     }
 }
