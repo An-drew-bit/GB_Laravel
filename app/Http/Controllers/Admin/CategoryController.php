@@ -8,10 +8,8 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Category $categories)
     {
-        $categories = app(Category::class);
-
         return view('admin.category.index', [
             'categories' => $categories->all(),
         ]);
@@ -24,7 +22,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all());
+        Category::create($request->validated());
 
         return to_route('admin.category.index')->with('success', 'Категория успешно добавлена');
     }
@@ -38,18 +36,18 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update($request->validated());
 
         return to_route('admin.category.index')->with('success', 'Изменения сохранены');
     }
 
     public function destroy(Category $category)
     {
-        /*$category = */$category->delete();
+        if (count($category->news)) {
+            return to_route('admin.category.index')->with('error', 'Ошибка, у категории есть новости');
+        }
 
-        /*if ($category->news->count()) {
-            return to_route('admin.category.index')->with('error', 'Ошибка, у категории есть новости'); как сделать проверку на есть ли там записи?
-        }*/
+        $category->delete();
 
         return to_route('admin.category.index')->with('success', 'Категория успешно удалена');
     }
