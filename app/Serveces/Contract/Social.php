@@ -6,5 +6,5 @@ use Laravel\Socialite\Contracts\User;
 
 interface Social
 {
-    public function registerViaSocialNetwork(User $socialUser): string;
+    public function authViaSocialNetwork(User $socialUser): string;
 }

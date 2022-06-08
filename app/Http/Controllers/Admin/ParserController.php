@@ -3,30 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Serveces\Contract\Parser;
 use Illuminate\Http\Request;
-use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Parser $parser)
     {
-        $xml = XmlParser::load('https://news.yandex.ru/army.rss');
-
-        $data = $xml->parse([
-            'title' => [
-                'uses' => 'channel.title'
-            ],
-            'description' => [
-                'uses' => 'channel.description'
-            ],
-            'lastBuildDate' => [
-                'uses' => 'channel.lastBuildDate'
-            ],
-            'news' => [
-                'uses' => 'channel.item[title,link,guid,description,pubDate]'
-            ]
-        ]);
-
-        return $data;
+        dd($parser->setUrl('https://news.yandex.ru/army.rss')->parse());
     }
 }

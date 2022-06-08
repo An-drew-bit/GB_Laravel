@@ -15,6 +15,6 @@ class SocialController extends Controller
 
     public function callback(string $driver, Social $social)
     {
-        $social->registerViaSocialNetwork(Socialite::driver($driver)->user());
+        $social->authViaSocialNetwork(Socialite::driver($driver)->user());
     }
 }

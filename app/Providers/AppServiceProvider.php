@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Serveces\Contract\Social;
-use App\Serveces\SocialService;
+use App\Serveces\Contract\{Parser, Social};
+use App\Serveces\{ParserService, SocialService};
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(Social::class, SocialService::class);
+        $this->app->bind(Parser::class, ParserService::class);
     }
 
     /**

@@ -9,7 +9,7 @@ use App\Models\User;
 
 class SocialService implements Social
 {
-    public function registerViaSocialNetwork(SocialUser $socialUser): string
+    public function authViaSocialNetwork(SocialUser $socialUser): string
     {
        $user = User::where('email', $socialUser->getEmail());
 
