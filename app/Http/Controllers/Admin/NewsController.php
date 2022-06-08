@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewsRequest;
+use App\Serveces\Contract\Upload;
 use App\Models\{Category, News, User};
 
 class NewsController extends Controller
@@ -39,9 +40,15 @@ class NewsController extends Controller
         ]);
     }
 
-    public function update(NewsRequest $request, News $news)
+    public function update(NewsRequest $request, News $news, Upload $upload)
     {
-        $news->update($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $upload->uploadImage($request->file('image'));
+        }
+
+        $news->update($validated);
 
         return to_route('admin.news.index')->with('success', 'Изменения сохранены');
     }

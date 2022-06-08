@@ -12,7 +12,7 @@ class News extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'description', 'category_id', 'slug'];
+    protected $fillable = ['title', 'description', 'image', 'category_id', 'slug'];
 
     public function category(): BelongsTo
     {
