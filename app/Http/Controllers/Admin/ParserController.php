@@ -3,13 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Serveces\Contract\Parser;
+use App\Jobs\NewsParsingJob;
 use Illuminate\Http\Request;
 
 class ParserController extends Controller
 {
-    public function __invoke(Request $request, Parser $parser)
+    public function __invoke(Request $request, )
     {
-        dd($parser->setUrl('https://news.yandex.ru/army.rss')->parse());
+        // сделать из базы
+
+        $urls = [
+
+        ];
+
+        foreach ($urls as $url) {
+            dispatch(new NewsParsingJob($url));
+        }
+
+        return back()->with('success', 'Новости добавлены в очередь');
     }
 }

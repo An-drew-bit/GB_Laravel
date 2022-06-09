@@ -16,7 +16,7 @@
             <div class="d-flex flex-row flex-wrap">
                 @foreach($categories as $category)
                     <div class="col">
-                        <h3><a href="{{ route('home') }}">{{ $category->title }}</a></h3>
+                        <h3><a href="{{ route('categories.view', ['slug' => $category->slug]) }}">{{ $category->title }}</a></h3>
                     </div>
                 @endforeach
             </div>

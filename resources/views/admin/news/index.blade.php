@@ -5,7 +5,8 @@
         <h1 class="h2">Список новостей</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить</a>
+                <a href="{{ route('admin.parser') }}" class="btn btn-sm btn-outline-secondary">Спарсить новости</a>
+                <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить новость</a>
             </div>
         </div>
     </div>

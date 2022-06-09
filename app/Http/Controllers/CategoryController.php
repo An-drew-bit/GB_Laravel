@@ -16,6 +16,6 @@ class CategoryController extends Controller
 
     public function getCategoryBySlug(string $slug)
     {
-
+        // вывести новости этой категории
     }
 }

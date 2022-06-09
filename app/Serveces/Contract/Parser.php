@@ -6,5 +6,5 @@ interface Parser
 {
     public function setUrl(string $url): Parser;
 
-    public function parse(): array;
+    public function parse(): void;
 }
