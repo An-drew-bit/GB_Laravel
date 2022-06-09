@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
-use App\Models\News;
+use App\Models\{Category, News};
 
 class NewsController extends Controller
 {
@@ -14,9 +14,11 @@ class NewsController extends Controller
         ]);
     }
 
-    public function showNew()
+    public function showNew(News $news, string $slug)
     {
-        return view('front.news.view');
+        return view('front.news.view', [
+            'news' => $news->where('slug', $slug)->first()
+        ]);
     }
 
     public function create()

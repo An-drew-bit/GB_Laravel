@@ -23,6 +23,7 @@ Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->gro
 
 Route::controller(\App\Http\Controllers\CategoryController::class)->group(function () {
     Route::get('/categories', 'index')->name('categories.index');
+    Route::get('/categories/{slug}', 'getCategoryBySlug')->name('categories.view');
 });
 
 Route::middleware('admin')->prefix('admin')->group(function () {

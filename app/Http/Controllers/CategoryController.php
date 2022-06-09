@@ -13,4 +13,9 @@ class CategoryController extends Controller
 
         return view('front.category.index', compact('categories'));
     }
+
+    public function getCategoryBySlug(string $slug)
+    {
+
+    }
 }
