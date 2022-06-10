@@ -38,6 +38,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
+
+    Route::resource('/resource', \App\Http\Controllers\Admin\ResourceController::class)
+        ->names('admin.resource');
 });
 
 Route::middleware('auth')->group(function () {

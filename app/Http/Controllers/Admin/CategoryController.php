@@ -20,9 +20,9 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request, Category $category)
     {
-        Category::create($request->validated());
+        $category->create($request->validated());
 
         return to_route('admin.category.index')->with('success', 'Категория успешно добавлена');
     }
