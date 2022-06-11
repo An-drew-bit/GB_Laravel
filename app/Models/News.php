@@ -31,4 +31,9 @@ class News extends Model
             ]
         ];
     }
+
+    public function scopeLike($query, $search): mixed
+    {
+        return $query->where('title', 'LIKE', "%{$search}%");
+    }
 }

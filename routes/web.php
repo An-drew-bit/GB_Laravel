@@ -7,6 +7,8 @@ Route::controller(\App\Http\Controllers\HomeController::class)->group(function (
     Route::post('/', 'subscribe')->name('subscribe');
 });
 
+Route::get('/search', \App\Http\Controllers\SearchController::class)->name('search');
+
 Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->group(function () {
     Route::get('/email/verify', 'getVerifyForm')
         ->middleware('auth')
