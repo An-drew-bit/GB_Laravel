@@ -4,7 +4,7 @@
     <section class="py-5 text-center container">
         <div class="row mt-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Поиск {{ $search }}</h1>
+                <h1 class="fw-light">Категория {{ $category->title }}</h1>
             </div>
         </div>
     </section>
@@ -32,14 +32,14 @@
                 </div>
             @empty
                 <div class="container text-center">
-                    <h2 class="fw-light">По вашему запросу ничего не найдено</h2>
+                    <h2 class="fw-light">Новостей пока нет</h2>
                 </div>
             @endforelse
         </div>
     </div>
 
     <div class="container mt-5">
-        <div>{{ $news->appends(['search' => request()->search])->links() }}</div>
+        <div>{{ $news->links() }}</div>
     </div>
 
 @endsection

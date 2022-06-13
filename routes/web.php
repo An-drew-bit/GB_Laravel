@@ -74,6 +74,7 @@ Route::middleware('guest')->group(function () {
         Route::get('/login/{driver}/redirect', [\App\Http\Controllers\Auth\SocialController::class, 'redirect'])
             ->where('driver', '\w+')
             ->name('social.redirect');
+
         Route::get('/login/{driver}/callback', [\App\Http\Controllers\Auth\SocialController::class, 'callback'])
             ->where('driver', '\w+')
             ->name('social.callback');

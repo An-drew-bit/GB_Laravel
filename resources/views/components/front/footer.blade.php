@@ -4,10 +4,10 @@
             <div class="col-6 col-md-2 mb-3">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Главная</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Новости</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Категории</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Отзывы</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('home') }}" class="nav-link p-0 text-muted">Главная</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('news.index') }}" class="nav-link p-0 text-muted">Новости</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('categories.index') }}" class="nav-link p-0 text-muted">Категории</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('feedback.index') }}" class="nav-link p-0 text-muted">Отзывы</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>

@@ -3,19 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Category $category)
     {
-        $categories = Category::all();
-
-        return view('front.category.index', compact('categories'));
+        return view('front.category.index', [
+            'categories' => $category->all()
+        ]);
     }
 
     public function getCategoryBySlug(string $slug)
     {
-        // вывести новости этой категории
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $news = $category->news()
+            ->orderByDesc('id')
+            ->paginate(5);
+
+        return view('front.category.getCategory', [
+            'category' => $category,
+            'news' => $news
+        ]);
     }
 }

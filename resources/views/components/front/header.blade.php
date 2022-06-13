@@ -39,7 +39,6 @@
         <div class="container d-flex flex-wrap justify-content-center">
             <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search"
                   method="GET" action="{{ route('search') }}">
-                @csrf
 
                 <input type="search" name="search" class="form-control
                     @error('search') is-invalid @enderror" placeholder="Search..." aria-label="Search">
