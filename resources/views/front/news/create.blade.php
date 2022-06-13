@@ -18,10 +18,7 @@
                 <label for="title" class="form-label">Заголовок</label>
                 <input type="text" class="form-control" name="title" value="{{ old('title') }}">
             </div>
-            <div class="mb-3 w-50">
-                <label for="author" class="form-label">Автор</label>
-                <input type="text" class="form-control" name="author" value="{{ old('author') }}">
-            </div>
+
             <div class="mb-3 w-50">
                 <label for="content" class="form-label">Контент</label>
                 <textarea class="form-control" name="content" rows="3">{!! old('content') !!} </textarea>

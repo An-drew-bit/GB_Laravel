@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
+use App\Http\Requests\Auth\ContactRequest;
+use App\Mail\ContactForm;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
-        $news = News::orderByDesc('created_at')->paginate(6);
+        return view('home');
+    }
 
-        return view('home', compact('news'));
+    public function subscribe(ContactRequest $request)
+    {
+        Mail::to(auth()->user()->email)->send(new ContactForm($request->get('email')));
+
+        return back()->with('success', 'Вы успешно пoдписались на рассылку');
     }
 }

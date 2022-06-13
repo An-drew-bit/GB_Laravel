@@ -16,7 +16,7 @@
 
 <main>
 
-    <div class="container mt-5">
+    <div class="container">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="list-unstyled">

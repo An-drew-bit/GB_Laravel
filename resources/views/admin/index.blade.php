@@ -28,4 +28,14 @@
             <h6 class="fw-light">Ворнинг</h6>
         </div>
     </div>
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Роли и права пользователей</h1>
+    </div>
+
+    <div class="d-flex flex-column">
+        <h5 class="fw-light">1 - Администратор</h5>
+        <h5 class="fw-light">2 - Менеджер</h5>
+        <h5 class="fw-light">0 - Пользователь</h5>
+    </div>
 @endsection

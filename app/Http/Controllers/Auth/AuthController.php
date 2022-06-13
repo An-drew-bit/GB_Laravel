@@ -48,7 +48,11 @@ class AuthController extends Controller
         ])) {
             session()->flash('success', 'Вы успешно вошли');
 
-            if (auth()->user()->is_admin) {
+            if (auth()->user()->is_admin == 1) {
+                return to_route('admin.index');
+
+            } elseif (auth()->user()->is_admin == 2) {
+
                 return to_route('admin.index');
 
             } else {

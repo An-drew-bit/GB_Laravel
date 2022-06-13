@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'is_admin'
     ];
 
     /**
@@ -45,5 +46,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function news()
     {
         return $this->hasMany(News::class);
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
     }
 }

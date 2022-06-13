@@ -1,57 +1,62 @@
 <header>
-    <div class="collapse bg-dark" id="navbarHeader">
+    <div class="px-3 py-2 bg-dark text-white">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white">About</h4>
-                    <p class="text-muted">Add some information about the album below, the author, or any other
-                        background context. Make it a few sentences long so folks can pick up some informative tidbits.
-                        Then, link them off to some social networking sites or contact information.</p>
+            <div class="blog-header lh-1 py-3">
+                <div class="text-center">
+                    <a class="blog-header-logo text-white" href="{{ route('home') }}">Large</a>
                 </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">Contact</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('home') }}" class="text-white">Главная</a></li>
-                        <li><a href="{{ route('category') }}" class="text-white">Категории</a></li>
-                        <div class="d-flex">
-                            @auth
-                                @if($name->is_admin)
-                                    <li><a href="{{ route('admin.index') }}" class="text-white">Админка</a><b
-                                            class="text-white m-lg-2">|</b></li>
-                                @else
-                                    <li><a href="{{ route('home') }}" class="text-white">Личный кабинет</a><b
-                                            class="text-white m-lg-2">|</b></li>
-                                @endif
-                                <li><a href="{{ route('logout') }}" class="text-white m-lg-0">Выйти {{ $name->name }}</a></li>
-                            @endauth
 
-                            @guest
-                                <li><a href="{{ route('login.showForm') }}" class="text-white">Войти</a><b
-                                        class="text-white m-lg-2">|</b></li>
-                                <li><a href="{{ route('register.showForm') }}"
-                                       class="text-white m-lg-0">Регистрация</a></li>
-                            @endguest
-                        </div>
-                    </ul>
-                </div>
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a href="{{ route('home') }}" class="nav-link @if(request()->routeIs('home')) text-secondary @else text-white @endif">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+                            Главная
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('news.index') }}" class="nav-link @if(request()->routeIs('news.*')) text-secondary @else text-white @endif">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+                            Новости
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories.index') }}" class="nav-link @if(request()->routeIs('categories.*')) text-secondary @else text-white @endif">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                            Категории
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('feedback.index') }}" class="nav-link @if(request()->routeIs('feedback.*')) text-secondary @else text-white @endif">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+                            Отзывы
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
-                     viewBox="0 0 24 24">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
-                </svg>
-                <strong>Album</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
-                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div class="px-3 py-2 border-bottom mb-3">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+            @auth
+                <div class="text-end">
+                    @if($name->is_admin)
+                        <a href="{{ route('admin.index') }}" class="btn btn-primary">Админка</a>
+                    @else
+                        <a href="{{ route('home') }}" class="btn btn-primary">Личный кабинет</a>
+                    @endif
+                        <a href="{{ route('logout') }}" class="btn btn-light text-dark me-2">Выйти</a>
+                </div>
+            @endauth
+
+            @guest
+                <div class="text-end">
+                    <a href="{{ route('login.showForm') }}" class="btn btn-light text-dark me-2">Войти</a>
+                    <a href="{{ route('register.showForm') }}" class="btn btn-primary">Регистрация</a>
+                </div>
+            @endguest
         </div>
     </div>
 </header>

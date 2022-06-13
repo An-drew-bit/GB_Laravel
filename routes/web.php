@@ -2,25 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+Route::controller(\App\Http\Controllers\HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::post('/', 'subscribe')->name('subscribe');
+});
 
 Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->group(function () {
-    Route::get('/email/verify', 'getVerifyForm')->middleware('auth')
+    Route::get('/email/verify', 'getVerifyForm')
+        ->middleware('auth')
         ->name('verification.notice');
 
-    Route::get('/email/verify/{id}/{hash}', 'verifycationRequest')->middleware('auth')
+    Route::get('/email/verify/{id}/{hash}', 'verifycationRequest')
+        ->middleware('auth')
         ->name('verification.verify');
 
-    Route::post('/email/verification-notification', 'repeatSendToMail')->middleware(['auth', 'throttle:6,1'])
+    Route::post('/email/verification-notification', 'repeatSendToMail')
+        ->middleware(['auth', 'throttle:6,1'])
         ->name('verification.send');
 });
 
 Route::controller(\App\Http\Controllers\CategoryController::class)->group(function () {
-    Route::get('/category', 'index')->name('category');
+    Route::get('/categories', 'index')->name('categories.index');
 });
 
-// admin route
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', \App\Http\Controllers\Admin\MainController::class)->name('admin.index');
 
     Route::resource('/category', \App\Http\Controllers\Admin\CategoryController::class)
@@ -32,7 +37,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
 });
-// end admin route
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
@@ -41,9 +45,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/news/create', 'create')->name('news.create');
         Route::post('/news/add', 'store')->name('news.store');
     });
+
+    Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function () {
+        Route::get('/feedback', 'index')->name('feedback.index');
+        Route::post('/feedback', 'store')->name('feedback.store');
+    });
 });
 
-Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.view');
+Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
+    Route::get('/news', 'index')->name('news.index');
+    Route::get('/news/{slug}', 'showNew')->name('news.view');
+});
+
+Route::get('/feedback', [\App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.index');
 
 Route::middleware('guest')->group(function () {
     Route::controller(\App\Http\Controllers\Auth\AuthController::class)->group(function () {
