@@ -5,7 +5,9 @@
         <h1 class="h2">Список url</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <a href="{{ route('admin.resource.create') }}" class="btn btn-sm btn-outline-secondary">Добавить url</a>
+                @can('create', $resources)
+                    <a href="{{ route('admin.resource.create') }}" class="btn btn-sm btn-outline-secondary">Добавить url</a>
+                @endcan
             </div>
         </div>
     </div>
@@ -28,20 +30,22 @@
                         <td>{{ $resource->id }}</td>
                         <td>{{ $resource->url }}</td>
 
-                        <td class="d-flex justify-content-end">
-                            <a href="{{ route('admin.resource.edit', ['resource' => $resource->id]) }}"
-                               class="btn btn-primary btn-sm text-white">Edit</a>
+                        @canany(['update', 'delete'], $resource)
+                            <td class="d-flex justify-content-end">
+                                <a href="{{ route('admin.resource.edit', ['resource' => $resource->id]) }}"
+                                   class="btn btn-primary btn-sm text-white">Edit</a>
 
-                            <form action="{{ route('admin.resource.destroy', ['resource' => $resource->id]) }}"
-                                  method="post">
-                                @csrf
-                                @method('DELETE')
+                                <form action="{{ route('admin.resource.destroy', ['resource' => $resource->id]) }}"
+                                      method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger ms-3 btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">Delete
-                                </button>
-                            </form>
-                        </td>
+                                    <button type="submit" class="btn btn-danger ms-3 btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">Delete
+                                    </button>
+                                </form>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
 

@@ -5,7 +5,9 @@
         <h1 class="h2">Список категорий</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-outline-secondary">Добавить</a>
+                @can('create', $categories)
+                    <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-outline-secondary">Добавить</a>
+                @endcan
             </div>
         </div>
     </div>
@@ -33,16 +35,17 @@
                         <td class="d-flex justify-content-end">
                             <a href="{{ route('admin.category.edit', ['category' => $category]) }}"
                                class="btn btn-primary btn-sm text-white">Edit</a>
+                            @can('delete', $category)
+                                <form action="{{ route('admin.category.destroy', ['category' => $category]) }}"
+                                      method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                            <form action="{{ route('admin.category.destroy', ['category' => $category]) }}"
-                                  method="post">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger ms-3 btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">Delete
-                                </button>
-                            </form>
+                                    <button type="submit" class="btn btn-danger ms-3 btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">Delete
+                                    </button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

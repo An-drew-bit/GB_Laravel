@@ -48,9 +48,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
-    Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
-        Route::get('/news/create', 'create')->name('news.create');
-        Route::post('/news/add', 'store')->name('news.store');
+    Route::middleware('verified')->group(function () {
+        Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
+            Route::get('/news/create', 'create')->name('news.create');
+            Route::post('/news/add', 'store')->name('news.store');
+        });
     });
 
     Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function () {

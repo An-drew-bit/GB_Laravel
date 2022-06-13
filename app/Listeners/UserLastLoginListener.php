@@ -29,7 +29,7 @@ class UserLastLoginListener
     {
         if (isset($event->user) && $event->user instanceof User) {
             $event->user->last_login_at = now('Europe/Moscow');
-            $event->user->remember_token = Str::random(10);
+            $event->user->remember_token = bcrypt(Str::random(10));
 
             $event->user->save();
         }

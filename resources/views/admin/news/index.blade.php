@@ -5,8 +5,10 @@
         <h1 class="h2">Список новостей</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <a href="{{ route('admin.parser') }}" class="btn btn-sm btn-outline-secondary">Спарсить новости</a>
-                <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить новость</a>
+                @can('create', $news)
+                    <a href="{{ route('admin.parser') }}" class="btn btn-sm btn-outline-secondary">Спарсить новости</a>
+                    <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить новость</a>
+                @endcan
             </div>
         </div>
     </div>
@@ -42,15 +44,17 @@
                                class="btn btn-primary btn-sm text-white">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.news.destroy', ['news' => $new->id]) }}"
-                                  method="post">
-                                @csrf
-                                @method('DELETE')
+                            @can('delete', $new)
+                                <form action="{{ route('admin.news.destroy', ['news' => $new->id]) }}"
+                                      method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger ms-3 btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">Delete
-                                </button>
-                            </form>
+                                    <button type="submit" class="btn btn-danger ms-3 btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">Delete
+                                    </button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

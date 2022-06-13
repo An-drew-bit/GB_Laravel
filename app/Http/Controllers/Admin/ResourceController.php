@@ -8,6 +8,11 @@ use App\Models\Resource;
 
 class ResourceController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Resource::class, 'resource');
+    }
+
     public function index(Resource $resource)
     {
         return view('admin.resource.index', [

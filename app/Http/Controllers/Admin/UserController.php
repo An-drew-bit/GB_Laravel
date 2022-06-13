@@ -8,6 +8,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'users');
+    }
+
     public function index(User $users)
     {
         return view('admin.users.index', [

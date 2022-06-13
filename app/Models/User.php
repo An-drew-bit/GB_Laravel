@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable, HasApiTokens, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -26,8 +26,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'last_login_at',
     ];
-
-    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
