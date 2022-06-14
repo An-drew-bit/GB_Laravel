@@ -42,6 +42,11 @@ class UserController extends Controller
 
     public function destroy()
     {
+        $user = User::where('id', auth()->user()->getAuthIdentifier())
+            ->firstOrFail();
 
+        $user->delete();
+
+        return to_route('home')->with('success', 'Вы успешно удалили свой аккаунт');
     }
 }
