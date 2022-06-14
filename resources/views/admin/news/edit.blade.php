@@ -8,7 +8,8 @@
 
 @section('content')
     <div class="container d-flex flex-column">
-        <form action="{{ route('admin.news.update', ['news' => $news]) }}" method="post">
+        <form action="{{ route('admin.news.update', ['news' => $news]) }}"
+              method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -34,6 +35,11 @@
             <div class="mb-3 w-50">
                 <label for="image" class="form-label">Изображение</label>
                 <input type="file" class="form-control" name="image">
+            </div>
+            <div class="mb-3 w-50">
+                @if($news->image)
+                    <img src="{{ Storage::url($news->image) }}" alt="image" class="w-50 h-25">
+                @endif
             </div>
 
             <button type="submit" class="btn btn-primary mb-3">Изменить</button>

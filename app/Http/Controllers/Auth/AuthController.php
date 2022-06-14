@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserLastLoginEvent;
 use App\Http\Controllers\Controller;
-use App\Mail\ForgotPassword;
+use App\Jobs\ForgotUserEmailJob;
 use App\Http\Requests\Auth\{AuthRequest, ForgotRequest, RegisterRequest};
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -16,9 +16,9 @@ class AuthController extends Controller
         return view('auth.registerForm');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(RegisterRequest $request, User $user)
     {
-        $user = User::create([
+        $user->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -46,6 +46,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
+            event(new UserLastLoginEvent(auth()->user()));
+
             session()->flash('success', 'Вы успешно вошли');
 
             if (auth()->user()->is_admin == 1) {
@@ -68,16 +70,16 @@ class AuthController extends Controller
         return view('auth.forgotPassword.forgotForm');
     }
 
-    public function forgot(ForgotRequest $request)
+    public function forgot(ForgotRequest $request, User $user)
     {
-        $user = User::where(['email' => $request->get('email')])->first();
+        $user->where(['email' => $request->get('email')])->first();
 
         $password = uniqid();
 
         $user->password = bcrypt($password);
         $user->save();
 
-        Mail::to($user)->send(new ForgotPassword($password));
+        dispatch(new ForgotUserEmailJob($user, $password));
 
         return to_route('login.showForm')->with('message', 'Письмо отправлено в логи');
     }
