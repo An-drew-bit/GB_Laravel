@@ -48,7 +48,7 @@
                     @if($name->is_admin)
                         <a href="{{ route('admin.index') }}" class="btn btn-primary">Админка</a>
                     @else
-                        <a href="{{ route('home') }}" class="btn btn-primary">Личный кабинет</a>
+                        <a href="{{ route('profile.index') }}" class="btn btn-primary">Личный кабинет</a>
                     @endif
                         <a href="{{ route('logout') }}" class="btn btn-light text-dark me-2">Выйти</a>
                 </div>

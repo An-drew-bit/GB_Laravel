@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'users');
+        $this->authorizeResource(User::class, 'user');
     }
 
     public function index(User $users)
@@ -34,10 +34,10 @@ class UserController extends Controller
         return to_route('admin.users.index')->with('success', 'Изменения сохранены');
     }
 
-    public function destroy(User $users)
+    public function destroy(User $user)
     {
-        $users->delete();
+        $user->delete();
 
-        return to_route('admin.news.index')->with('success', 'Пользователь успешно удален');
+        return to_route('admin.users.index')->with('success', 'Пользователь успешно удален');
     }
 }

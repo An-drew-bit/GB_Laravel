@@ -46,6 +46,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::resource('/profile', \App\Http\Controllers\UserController::class)
+        ->middleware('access')
+        ->names('profile');
+
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
     Route::middleware('verified')->group(function () {
