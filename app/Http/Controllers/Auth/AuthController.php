@@ -16,9 +16,9 @@ class AuthController extends Controller
         return view('auth.registerForm');
     }
 
-    public function store(RegisterRequest $request, User $user)
+    public function store(RegisterRequest $request)
     {
-        $user->create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -50,11 +50,7 @@ class AuthController extends Controller
 
             session()->flash('success', 'Вы успешно вошли');
 
-            if (auth()->user()->is_admin == 1) {
-                return to_route('admin.index');
-
-            } elseif (auth()->user()->is_admin == 2) {
-
+            if (auth()->user()->is_admin) {
                 return to_route('admin.index');
 
             } else {
@@ -70,14 +66,14 @@ class AuthController extends Controller
         return view('auth.forgotPassword.forgotForm');
     }
 
-    public function forgot(ForgotRequest $request, User $user)
+    public function forgot(ForgotRequest $request)
     {
-        $user->where(['email' => $request->get('email')])->first();
+        $user = User::where(['email' => $request->get('email')])->firstOrFail();
 
         $password = uniqid();
 
         $user->password = bcrypt($password);
-        $user->save();
+        $user->update();
 
         dispatch(new ForgotUserEmailJob($user, $password));
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,15 +47,34 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $dates = ['last_login_at'];
 
-    public function news()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function news(): HasMany
     {
         return $this->hasMany(News::class);
     }
 
-    public function feedback()
+    /**
+     * @return HasMany
+     */
+    public function feedback(): HasMany
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    /**
+     * @param $query
+     * @param $user
+     * @return mixed
+     */
+    public function scopeCurrent($query, $user): mixed
+    {
+        return $query->where('id', $user)->firstOrFail();
     }
 }

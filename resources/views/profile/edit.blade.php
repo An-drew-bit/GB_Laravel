@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="container d-flex flex-column">
-        <form action="{{ route('profile.update', ['profile' => $user->id]) }}"
+        <form action="{{ route('profile.update', ['profile' => $user]) }}"
               method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')

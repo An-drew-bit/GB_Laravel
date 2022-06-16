@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
 use App\Models\User;
+use App\Http\Requests\ProfileRequest;
 use App\Serveces\Contract\Upload;
 
 class UserController extends Controller
@@ -11,23 +11,20 @@ class UserController extends Controller
     public function index(User $user)
     {
         return view('profile.index', [
-            'user' => $user->where('id', auth()->user()->getAuthIdentifier())
-                ->firstOrFail()
+            'user' => $user->current(auth()->user()->getAuthIdentifier())
         ]);
     }
 
     public function edit(User $user)
     {
         return view('profile.edit', [
-            'user' => $user->where('id', auth()->user()->getAuthIdentifier())
-                ->firstOrFail()
+            'user' => $user->current(auth()->user()->getAuthIdentifier())
         ]);
     }
 
     public function update(ProfileRequest $request, Upload $upload)
     {
-        $user = User::where('id', auth()->user()->getAuthIdentifier())
-            ->firstOrFail();
+        $user = User::current(auth()->user()->getAuthIdentifier());
 
         $validated = $request->validated();
 
@@ -42,8 +39,7 @@ class UserController extends Controller
 
     public function destroy()
     {
-        $user = User::where('id', auth()->user()->getAuthIdentifier())
-            ->firstOrFail();
+        $user = User::current(auth()->user()->getAuthIdentifier());
 
         $user->delete();
 

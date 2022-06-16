@@ -11,18 +11,32 @@ class News extends Model
 {
     use HasFactory, Sluggable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = ['title', 'description', 'image', 'category_id', 'slug'];
 
+    /**
+     * @return BelongsTo
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
         return [
@@ -32,6 +46,11 @@ class News extends Model
         ];
     }
 
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
     public function scopeLike($query, $search): mixed
     {
         return $query->where('title', 'LIKE', "%{$search}%");
