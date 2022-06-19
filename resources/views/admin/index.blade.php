@@ -38,4 +38,30 @@
         <h5 class="fw-light">2 - Менеджер</h5>
         <h5 class="fw-light">0 - Пользователь</h5>
     </div>
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Возможные адреса для парсинга новостей</h1>
+    </div>
+
+    <div class="d-flex flex-column mb-5">
+        <h5 class="fw-light">https://news.yandex.ru/army.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/gadgets.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/index.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/martial_arts.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/communal.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/health.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/games.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/internet.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/games.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/cyber_sport.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/movies.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/cosmos.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/culture.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/nhl.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/nhl.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/music.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/auto_racing.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/auto_racing.rss</h5>
+        <h5 class="fw-light">https://news.yandex.ru/auto.rss</h5>
+    </div>
 @endsection

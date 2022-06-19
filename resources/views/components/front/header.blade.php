@@ -37,15 +37,18 @@
     </div>
     <div class="px-3 py-2 border-bottom mb-3">
         <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search"
+                  method="GET" action="{{ route('search') }}">
+
+                <input type="search" name="search" class="form-control
+                    @error('search') is-invalid @enderror" placeholder="Search..." aria-label="Search">
             </form>
             @auth
                 <div class="text-end">
                     @if($name->is_admin)
                         <a href="{{ route('admin.index') }}" class="btn btn-primary">Админка</a>
                     @else
-                        <a href="{{ route('home') }}" class="btn btn-primary">Личный кабинет</a>
+                        <a href="{{ route('profile.index') }}" class="btn btn-primary">Личный кабинет</a>
                     @endif
                         <a href="{{ route('logout') }}" class="btn btn-light text-dark me-2">Выйти</a>
                 </div>

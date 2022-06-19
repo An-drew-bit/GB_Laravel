@@ -29,21 +29,22 @@
                         <td>{{ $user->created_at->format('d-m-Y') }}</td>
                         <td>{{ $user->is_admin }}</td>
 
+                        @canany(['update', 'delete'], $user)
+                            <td class="d-flex justify-content-end">
+                                <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}"
+                                   class="btn btn-primary btn-sm text-white">Edit</a>
 
-                        <td class="d-flex justify-content-end">
-                            <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}"
-                               class="btn btn-primary btn-sm text-white">Edit</a>
+                                <form action="{{ route('admin.users.destroy', ['user' => $user]) }}"
+                                      method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                            <form action="{{ route('admin.users.destroy', ['user' => $user]) }}"
-                                  method="post">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger ms-3 btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">Delete
-                                </button>
-                            </form>
-                        </td>
+                                    <button type="submit" class="btn btn-danger ms-3 btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">Delete
+                                    </button>
+                                </form>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
 

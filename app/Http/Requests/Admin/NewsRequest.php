@@ -13,7 +13,7 @@ class NewsRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth('web')->check();
+        return true;
     }
 
     /**

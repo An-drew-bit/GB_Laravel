@@ -2,11 +2,11 @@
 
 @section('title')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Список категорий</h1>
+        <h1 class="h2">Список url</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                @can('create', $categories)
-                    <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-outline-secondary">Добавить</a>
+                @can('create', $resources)
+                    <a href="{{ route('admin.resource.create') }}" class="btn btn-sm btn-outline-secondary">Добавить url</a>
                 @endcan
             </div>
         </div>
@@ -15,28 +15,27 @@
 
 @section('content')
     <div class="table-responsive">
-        @if(count($categories))
+        @if(count($resources))
             <table class="table table-striped table-sm">
                 <thead>
                 <tr>
                     <th scope="col">#ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Slug</th>
+                    <th scope="col">Url</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                @foreach($categories as $category)
+                @foreach($resources as $resource)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->title }}</td>
-                        <td>{{ $category->slug }}</td>
+                        <td>{{ $resource->id }}</td>
+                        <td>{{ $resource->url }}</td>
 
-                        <td class="d-flex justify-content-end">
-                            <a href="{{ route('admin.category.edit', ['category' => $category]) }}"
-                               class="btn btn-primary btn-sm text-white">Edit</a>
-                            @can('delete', $category)
-                                <form action="{{ route('admin.category.destroy', ['category' => $category]) }}"
+                        @canany(['update', 'delete'], $resource)
+                            <td class="d-flex justify-content-end">
+                                <a href="{{ route('admin.resource.edit', ['resource' => $resource->id]) }}"
+                                   class="btn btn-primary btn-sm text-white">Edit</a>
+
+                                <form action="{{ route('admin.resource.destroy', ['resource' => $resource->id]) }}"
                                       method="post">
                                     @csrf
                                     @method('DELETE')
@@ -45,17 +44,21 @@
                                             onclick="return confirm('Подтвердите удаление')">Delete
                                     </button>
                                 </form>
-                            @endcan
-                        </td>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
 
                 @else
                     <div class="container text-center">
-                        <h2 class="h4 fw-light">Категорий пока нет..</h2>
+                        <h2 class="h4 fw-light">Url's пока нет..</h2>
                     </div>
                 @endif
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+
+            <div class="container mt-3">
+                <div>{{ $resources->links() }}</div>
+            </div>
     </div>
 @endsection

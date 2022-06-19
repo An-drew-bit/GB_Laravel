@@ -18,7 +18,8 @@ class NewsFactory extends Factory
     {
         return [
             'title' => ucfirst($this->faker->words(4, true)),
-            'description' => $this->faker->text
+            'description' => $this->faker->text,
+            'category_id' => $this->faker->numberBetween(1, 5)
         ];
     }
 }

@@ -20,10 +20,10 @@ class SocialService implements Social
            if ($user->save()) {
                auth('web')->login($user);
 
-               return to_route('home')->with('success', 'Вы успешно зарегистрировались');
+               return to_route('home')->with('success', 'Вы успешно вошли');
 
            } else {
-               return to_route('register.showForm');
+               return to_route('login.showForm');
            }
 
        }

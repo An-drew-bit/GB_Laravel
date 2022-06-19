@@ -7,6 +7,8 @@ Route::controller(\App\Http\Controllers\HomeController::class)->group(function (
     Route::post('/', 'subscribe')->name('subscribe');
 });
 
+Route::get('/search', \App\Http\Controllers\SearchController::class)->name('search');
+
 Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->group(function () {
     Route::get('/email/verify', 'getVerifyForm')
         ->middleware('auth')
@@ -23,6 +25,7 @@ Route::controller(\App\Http\Controllers\Auth\VerificationController::class)->gro
 
 Route::controller(\App\Http\Controllers\CategoryController::class)->group(function () {
     Route::get('/categories', 'index')->name('categories.index');
+    Route::get('/categories/{slug}', 'getCategoryBySlug')->name('categories.view');
 });
 
 Route::middleware('admin')->prefix('admin')->group(function () {
@@ -37,14 +40,23 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
+
+    Route::resource('/resource', \App\Http\Controllers\Admin\ResourceController::class)
+        ->names('admin.resource');
 });
 
 Route::middleware('auth')->group(function () {
+    Route::resource('/profile', \App\Http\Controllers\UserController::class)
+        ->middleware('access')
+        ->names('profile');
+
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
-    Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
-        Route::get('/news/create', 'create')->name('news.create');
-        Route::post('/news/add', 'store')->name('news.store');
+    Route::middleware('verified')->group(function () {
+        Route::controller(\App\Http\Controllers\NewsController::class)->group(function () {
+            Route::get('/news/create', 'create')->name('news.create');
+            Route::post('/news/add', 'store')->name('news.store');
+        });
     });
 
     Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function () {
@@ -68,6 +80,7 @@ Route::middleware('guest')->group(function () {
         Route::get('/login/{driver}/redirect', [\App\Http\Controllers\Auth\SocialController::class, 'redirect'])
             ->where('driver', '\w+')
             ->name('social.redirect');
+
         Route::get('/login/{driver}/callback', [\App\Http\Controllers\Auth\SocialController::class, 'callback'])
             ->where('driver', '\w+')
             ->name('social.callback');

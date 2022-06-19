@@ -9,6 +9,11 @@ use App\Models\{Category, News, User};
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(News::class, 'news');
+    }
+
     public function index(News $news)
     {
         return view('admin.news.index', [
