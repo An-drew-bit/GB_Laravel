@@ -5,18 +5,22 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserLastLoginEvent;
 use App\Http\Controllers\Controller;
 use App\Jobs\ForgotUserEmailJob;
+use App\Queries\Auth\AuthBuilder;
 use App\Http\Requests\Auth\{AuthRequest, ForgotRequest, RegisterRequest};
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-    public function showRegisterForm()
+    public function showRegisterForm(): Application|Factory|View
     {
         return view('auth.registerForm');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(RegisterRequest $request): RedirectResponse
     {
         $user = User::create([
             'name' => $request->name,
@@ -35,17 +39,19 @@ class AuthController extends Controller
         return to_route('home')->with('success', 'Вы успешно зарегистрировались');
     }
 
-    public function showLoginForm()
+    public function showLoginForm(): Application|Factory|View
     {
         return view('auth.loginForm');
     }
 
-    public function login(AuthRequest $request)
+    public function login(AuthRequest $request): RedirectResponse
     {
-        if (auth('web')->attempt([
+        $attempt = auth('web')->attempt([
             'email' => $request->email,
             'password' => $request->password
-        ])) {
+        ]);
+
+        if ($attempt) {
             event(new UserLastLoginEvent(auth()->user()));
 
             session()->flash('success', 'Вы успешно вошли');
@@ -61,14 +67,14 @@ class AuthController extends Controller
         return to_route('login')->with('error', 'Не правильно введен Логин или Пароль');
     }
 
-    public function showForgotForm()
+    public function showForgotForm(): Application|Factory|View
     {
         return view('auth.forgotPassword.forgotForm');
     }
 
-    public function forgot(ForgotRequest $request)
+    public function forgot(ForgotRequest $request, AuthBuilder $builder): RedirectResponse
     {
-        $user = User::where(['email' => $request->get('email')])->firstOrFail();
+        $user = $builder->getUserForEmail($request->get('email'));
 
         $password = uniqid();
 
@@ -80,7 +86,7 @@ class AuthController extends Controller
         return to_route('login.showForm')->with('message', 'Письмо отправлено в логи');
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         auth('web')->logout();
 

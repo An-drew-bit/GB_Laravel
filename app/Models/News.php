@@ -16,7 +16,13 @@ class News extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['title', 'description', 'image', 'category_id', 'slug'];
+    protected $fillable = [
+        'title',
+        'description',
+        'image',
+        'category_id',
+        'slug'
+    ];
 
     /**
      * @return BelongsTo

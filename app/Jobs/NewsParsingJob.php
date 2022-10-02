@@ -28,7 +28,7 @@ class NewsParsingJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle(Parser $parser)
+    public function handle(Parser $parser): void
     {
         $parser->setUrl($this->url)->parse();
     }

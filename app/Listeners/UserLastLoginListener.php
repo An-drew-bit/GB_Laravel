@@ -16,7 +16,6 @@ class UserLastLoginListener
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -25,7 +24,7 @@ class UserLastLoginListener
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle($event): void
     {
         if (isset($event->user) && $event->user instanceof User) {
             $event->user->last_login_at = now('Europe/Moscow');

@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Queries\CategoryBuilder;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\{Factory, View};
 
 class CategoryController extends Controller
 {
-    public function index(Category $category)
+    public function index(CategoryBuilder $builder): Application|Factory|View
     {
+        $category = $builder->getAllCategory();
+
         return view('front.category.index', [
-            'categories' => $category->all()
+            'categories' => $category
         ]);
     }
 
-    public function getCategoryBySlug(string $slug)
+    public function getCategoryBySlug(string $slug, CategoryBuilder $builder): Application|Factory|View
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
+        $category = $builder->getCategoryBySlug($slug);
 
         $news = $category->news()
             ->orderByDesc('id')

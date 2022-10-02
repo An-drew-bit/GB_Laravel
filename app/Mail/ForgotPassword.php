@@ -25,7 +25,7 @@ class ForgotPassword extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): ForgotPassword
     {
         return $this->view('auth.email.forgot')->with([
             'password' => $this->password

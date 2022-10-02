@@ -3,32 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
-use App\Models\{Category, News, User};
+use App\Queries\NewsBuilder;
+use App\Models\{Category, User};
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Http\RedirectResponse;
 
 class NewsController extends Controller
 {
-    public function index(News $news)
+    public function index(NewsBuilder $builder): Application|Factory|View
     {
+        $news = $builder->getAllNews();
+
         return view('front.news.index', [
-            'news' => $news->orderByDesc('created_at')->paginate(6)
+            'news' => $news
         ]);
     }
 
-    public function showNew(News $news, string $slug)
+    public function showNew(NewsBuilder $builder, string $slug): Application|Factory|View
     {
+        $news = $builder->getNewBySlug($slug);
+
         return view('front.news.view', [
-            'news' => $news->where('slug', $slug)->first()
+            'news' => $news
         ]);
     }
 
-    public function create(Category $categories)
+    public function create(Category $categories): Application|Factory|View
     {
         return view('front.news.create', [
             'categories' => $categories->pluck('title', 'id')->all()
         ]);
     }
 
-    public function store(NewsRequest $request)
+    public function store(NewsRequest $request): RedirectResponse
     {
         $user = User::findOrFail(auth('web')->id());
 
