@@ -29,7 +29,7 @@ class ParserService implements Parser
         ]);
 
         foreach ($data['news'] as $key => $value) {
-            $this->news = new News();
+            $this->news = app(News::class);
 
             $this->news->title = $value['title'];
             $this->news->description = $value['description'];

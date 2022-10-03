@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewsRequest;
+use App\Queries\CategoryBuilder;
 use App\Serveces\Contract\Upload;
-use App\Models\{Category, News, User};
+use App\Models\{News, User};
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Http\RedirectResponse;
 
 class NewsController extends Controller
 {
@@ -14,21 +18,23 @@ class NewsController extends Controller
         $this->authorizeResource(News::class, 'news');
     }
 
-    public function index(News $news)
+    public function index(News $news): Application|Factory|View
     {
         return view('admin.news.index', [
             'news' => $news->paginate(10)
         ]);
     }
 
-    public function create(Category $categories)
+    public function create(CategoryBuilder $builder): Application|Factory|View
     {
+        $categories = $builder->getCategoryByPluck();
+
         return view('admin.news.create', [
-            'categories' => $categories->pluck('title', 'id')->all()
+            'categories' => $categories
         ]);
     }
 
-    public function store(NewsRequest $request)
+    public function store(NewsRequest $request): RedirectResponse
     {
         $user = User::findOrFail(auth('web')->id());
 
@@ -37,15 +43,17 @@ class NewsController extends Controller
         return to_route('admin.news.index')->with('success', 'Новость успешно добавлена');
     }
 
-    public function edit(News $news, Category $categories)
+    public function edit(News $news, CategoryBuilder $builder): Application|Factory|View
     {
+        $categories = $builder->getCategoryByPluck();
+
         return view('admin.news.edit', [
             'news' => $news,
-            'categories' => $categories->pluck('title', 'id')->all()
+            'categories' => $categories
         ]);
     }
 
-    public function update(NewsRequest $request, News $news, Upload $upload)
+    public function update(NewsRequest $request, News $news, Upload $upload): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -58,7 +66,7 @@ class NewsController extends Controller
         return to_route('admin.news.index')->with('success', 'Изменения сохранены');
     }
 
-    public function destroy(News $news)
+    public function destroy(News $news): RedirectResponse
     {
         $news->delete();
 

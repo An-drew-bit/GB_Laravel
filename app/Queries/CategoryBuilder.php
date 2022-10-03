@@ -27,4 +27,11 @@ class CategoryBuilder implements QueryBuilder
             ->where('slug', $slug)
             ->firstOrFail();
     }
+
+    public function getCategoryByPluck()
+    {
+        return $this->getBuilder()
+            ->pluck('title', 'id')
+            ->all();
+    }
 }
