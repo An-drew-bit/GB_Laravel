@@ -38,6 +38,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class)
         ->names('admin.news');
 
+    Route::post('/news/{id}/approved', [\App\Http\Controllers\Admin\NewsController::class, 'approved'])
+        ->name('admin.news.approved');
+
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
 

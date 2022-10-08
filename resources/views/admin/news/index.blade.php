@@ -40,6 +40,10 @@
                         <td>{{ $new->slug }}</td>
 
                         <td>
+                            <a href="{{ route('admin.news.approved', ['news' => $new->id]) }}"
+                               class="btn btn-primary btn-sm text-white">Approve</a>
+                        </td>
+                        <td>
                             <a href="{{ route('admin.news.edit', ['news' => $new->id]) }}"
                                class="btn btn-primary btn-sm text-white">Edit</a>
                         </td>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewsRequest;
-use App\Queries\CategoryBuilder;
+use App\Queries\{CategoryBuilder, NewsBuilder};
 use App\Serveces\Contract\Upload;
 use App\Models\{News, User};
 use Illuminate\Contracts\Foundation\Application;
@@ -71,5 +71,15 @@ class NewsController extends Controller
         $news->delete();
 
         return to_route('admin.news.index')->with('success', 'Новость успешно удалена');
+    }
+
+    private function approved(NewsBuilder $builder, int $id): RedirectResponse
+    {
+        $news = $builder->getNewsById($id);
+
+        $news->status = News::APPROVED;
+        $news->save();
+
+        return back()->with('success', 'Новость успешно подтверждене');
     }
 }

@@ -14,6 +14,12 @@ class NewsBuilder implements QueryBuilder
         return News::query();
     }
 
+    public function getNewsById(int $id): Model
+    {
+        return $this->getBuilder()
+            ->findOrFail($id);
+    }
+
     public function getAllNews(): LengthAwarePaginator
     {
         return $this->getBuilder()

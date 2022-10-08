@@ -20,7 +20,6 @@ class NewsFactory extends Factory
             'title' => ucfirst($this->faker->words(4, true)),
             'description' => $this->faker->text,
             'category_id' => $this->faker->numberBetween(1, 5),
-            'status' => 5,
         ];
     }
 }
