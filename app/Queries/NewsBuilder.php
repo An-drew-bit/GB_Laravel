@@ -17,6 +17,7 @@ class NewsBuilder implements QueryBuilder
     public function getAllNews(): LengthAwarePaginator
     {
         return $this->getBuilder()
+            ->where("status", News::APPROVED)
             ->orderByDesc('created_at')
             ->paginate(6);
     }

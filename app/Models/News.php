@@ -11,6 +11,10 @@ class News extends Model
 {
     use HasFactory, Sluggable;
 
+    const NEW = 0;
+    const APPROVED = 5;
+    const REJECTED = 10;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +25,8 @@ class News extends Model
         'description',
         'image',
         'category_id',
-        'slug'
+        'slug',
+        'status'
     ];
 
     /**
