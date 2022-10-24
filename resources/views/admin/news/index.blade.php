@@ -5,10 +5,9 @@
         <h1 class="h2">Список новостей</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                @can('create', $news)
-                    <a href="{{ route('admin.parser') }}" class="btn btn-sm btn-outline-secondary">Спарсить новости</a>
-                    <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить новость</a>
-                @endcan
+                <a href="{{ route('admin.parser') }}" class="btn btn-sm btn-outline-secondary">Спарсить новости</a>
+                <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-outline-secondary">Добавить новость</a>
+                <a href="{{ route('admin.new') }}" class="btn btn-sm btn-outline-secondary">Новые новости</a>
             </div>
         </div>
     </div>
@@ -26,6 +25,7 @@
                     <th scope="col">Author</th>
                     <th scope="col">Category</th>
                     <th scope="col">Slug</th>
+                    <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,11 +38,8 @@
                         <td>{{ $new->user_id }}</td>
                         <td>{{ $new->category_id }}</td>
                         <td>{{ $new->slug }}</td>
+                        <td>{{ $new->status }}</td>
 
-                        <td>
-                            <a href="{{ route('admin.news.approved', ['news' => $new->id]) }}"
-                               class="btn btn-primary btn-sm text-white">Approve</a>
-                        </td>
                         <td>
                             <a href="{{ route('admin.news.edit', ['news' => $new->id]) }}"
                                class="btn btn-primary btn-sm text-white">Edit</a>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\NewsStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,10 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class News extends Model
 {
     use HasFactory, Sluggable;
-
-    const NEW = 0;
-    const APPROVED = 5;
-    const REJECTED = 10;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +24,10 @@ class News extends Model
         'category_id',
         'slug',
         'status'
+    ];
+
+    protected $casts = [
+        'status' => NewsStatus::class
     ];
 
     /**

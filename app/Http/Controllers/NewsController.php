@@ -13,7 +13,7 @@ class NewsController extends Controller
 {
     public function index(NewsBuilder $builder): Application|Factory|View
     {
-        $news = $builder->getAllNews();
+        $news = $builder->getApprovedNews();
 
         return view('front.news.index', [
             'news' => $news

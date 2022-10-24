@@ -55,4 +55,15 @@ class NewsPolicy
     {
         return $user->is_admin == 1;
     }
+
+    /**
+     * Determine whether the user can approve the model.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function approve(User $user)
+    {
+        return $user->is_admin == 1;
+    }
 }

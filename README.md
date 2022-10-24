@@ -6,8 +6,7 @@
 {%project_folder%}: composer install
 {%project_folder%}: ./vendor/bin/sail или alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 {%project_folder%}: sail up -d
-{%project_folder%}: artisan migrate --seed
-{%project_folder%}: artisan artisan storage:link
+{%project_folder%}: aggregator:install
 ```
 
 ### Для локального запуска

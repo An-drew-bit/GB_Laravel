@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\NewsStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewsRequest;
 use App\Queries\{CategoryBuilder, NewsBuilder};
@@ -21,7 +22,17 @@ class NewsController extends Controller
     public function index(News $news): Application|Factory|View
     {
         return view('admin.news.index', [
-            'news' => $news->paginate(10)
+            'news' => $news->where('status', NewsStatus::APPROVED)
+                ->paginate(10)
+        ]);
+    }
+
+    public function newAddedNews(NewsBuilder $builder)
+    {
+        $news = $builder->getNewNews();
+
+        return view('admin.news.new', [
+            'news' => $news
         ]);
     }
 
@@ -73,13 +84,23 @@ class NewsController extends Controller
         return to_route('admin.news.index')->with('success', 'Новость успешно удалена');
     }
 
-    private function approved(NewsBuilder $builder, int $id): RedirectResponse
+    public function approve(NewsBuilder $builder, int $id): RedirectResponse
     {
         $news = $builder->getNewsById($id);
 
-        $news->status = News::APPROVED;
+        $news->status = NewsStatus::APPROVED;
         $news->save();
 
-        return back()->with('success', 'Новость успешно подтверждене');
+        return back()->with('success', 'Новость успешно подтверждена');
+    }
+
+    public function reject(NewsBuilder $builder, int $id): RedirectResponse
+    {
+        $news = $builder->getNewsById($id);
+
+        $news->status = NewsStatus::REJECTED;
+        $news->save();
+
+        return back()->with('success', 'Новость успешно отклонена');
     }
 }

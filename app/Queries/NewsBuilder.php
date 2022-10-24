@@ -2,6 +2,7 @@
 
 namespace App\Queries;
 
+use App\Enums\NewsStatus;
 use App\Models\News;
 use App\Queries\Contracts\QueryBuilder;
 use Illuminate\Database\Eloquent\{Builder, Model};
@@ -20,10 +21,18 @@ class NewsBuilder implements QueryBuilder
             ->findOrFail($id);
     }
 
-    public function getAllNews(): LengthAwarePaginator
+    public function getApprovedNews(): LengthAwarePaginator
     {
         return $this->getBuilder()
-            ->where("status", News::APPROVED)
+            ->where("status", NewsStatus::APPROVED)
+            ->orderByDesc('created_at')
+            ->paginate(6);
+    }
+
+    public function getNewNews(): LengthAwarePaginator
+    {
+        return $this->getBuilder()
+            ->where("status", NewsStatus::NEW)
             ->orderByDesc('created_at')
             ->paginate(6);
     }

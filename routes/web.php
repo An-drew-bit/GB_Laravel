@@ -31,6 +31,7 @@ Route::controller(\App\Http\Controllers\CategoryController::class)->group(functi
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', \App\Http\Controllers\Admin\MainController::class)->name('admin.index');
     Route::get('/parser', \App\Http\Controllers\Admin\ParserController::class)->name('admin.parser');
+    Route::get('/news/new', [\App\Http\Controllers\Admin\NewsController::class, 'newAddedNews'])->name('admin.new');
 
     Route::resource('/category', \App\Http\Controllers\Admin\CategoryController::class)
         ->names('admin.category');
@@ -38,8 +39,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class)
         ->names('admin.news');
 
-    Route::post('/news/{id}/approved', [\App\Http\Controllers\Admin\NewsController::class, 'approved'])
-        ->name('admin.news.approved');
+    Route::post('/news/{id}/approved', [\App\Http\Controllers\Admin\NewsController::class, 'approve'])
+        ->name('admin.news.approve');
+
+    Route::post('/news/{id}/reject', [\App\Http\Controllers\Admin\NewsController::class, 'reject'])
+        ->name('admin.news.reject');
 
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class)
         ->names('admin.users');
