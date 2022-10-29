@@ -4,7 +4,7 @@ namespace App\Enums;
 
 final class NewsStatus
 {
-    const NEW = 0;
-    const APPROVED = 5;
-    const REJECTED = 10;
+    case NEW = 0;
+    case APPROVED = 5;
+    case REJECTED = 10;
 }
