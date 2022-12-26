@@ -27,21 +27,17 @@ class NewsController extends Controller
         ]);
     }
 
-    public function newAddedNews(NewsBuilder $builder)
+    public function newAddedNews(NewsBuilder $builder): Factory|View|Application
     {
-        $news = $builder->getNewNews();
-
         return view('admin.news.new', [
-            'news' => $news
+            'news' => $builder->getNewNews()
         ]);
     }
 
     public function create(CategoryBuilder $builder): Application|Factory|View
     {
-        $categories = $builder->getCategoryByPluck();
-
         return view('admin.news.create', [
-            'categories' => $categories
+            'categories' => $builder->getCategoryByPluck()
         ]);
     }
 
@@ -56,23 +52,15 @@ class NewsController extends Controller
 
     public function edit(News $news, CategoryBuilder $builder): Application|Factory|View
     {
-        $categories = $builder->getCategoryByPluck();
-
         return view('admin.news.edit', [
             'news' => $news,
-            'categories' => $categories
+            'categories' => $builder->getCategoryByPluck()
         ]);
     }
 
     public function update(NewsRequest $request, News $news, Upload $upload): RedirectResponse
     {
-        $validated = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $validated['image'] = $upload->uploadImage($request->file('image'));
-        }
-
-        $news->update($validated);
+        $news->update($this->validated($request, $upload, 'image', 'images'));
 
         return to_route('admin.news.index')->with('success', 'Изменения сохранены');
     }

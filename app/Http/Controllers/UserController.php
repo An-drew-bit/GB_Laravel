@@ -33,13 +33,7 @@ class UserController extends Controller
     {
         $user = $builder->getCurrentUser(auth()->user()->getAuthIdentifier());
 
-        $validated = $request->validated();
-
-        if ($request->hasFile('avatar')) {
-            $validated['avatar'] = $upload->uploadImage($request->file('avatar'));
-        }
-
-        $user->update($validated);
+        $user->update($this->validated($request, $upload, 'avatar', 'avatars'));
 
         return to_route('profile.index')->with('success', 'Изменения сохранены');
     }
